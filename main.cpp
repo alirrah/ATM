@@ -3,11 +3,38 @@ using namespace std;
 
 void showMenu();
 
+class person{
+private:
+    string name, bank, data, card, cvv2, password;
+    double balance;
+public:
+    person()
+    {
+        balance = 500;
+    }
+    void showBalance()
+    {
+        cout << "Balance is: " << balance << " $" << endl;
+    }
+    void deposit(double depositAmount)
+    {
+        balance += depositAmount;
+    }
+    void withdraw(double withdrawAmount)
+    {
+        if (withdrawAmount <= balance)
+            balance -= withdrawAmount;
+        else
+            cout << "Not enough money" << endl;
+    }
+
+};
+
 int main()
 {
     // check balance, deposit, withdraw, show menu
     int option;
-    double balance = 500;
+    person user;
     do
     {
         system("cls");
@@ -17,24 +44,21 @@ int main()
         switch (option)
         {
         case 1:
-            cout << "Balance is: " << balance << " $" << endl;
+            user.showBalance();
             break;
 
         case 2:
             cout << "Deposit amount: ";
             double depositAmount;
             cin >> depositAmount;
-            balance += depositAmount;
+            user.deposit(depositAmount);
             break;
 
         case 3:
             cout << "Withdraw amount: ";
             double withdrawAmount;
             cin >> withdrawAmount;
-            if (withdrawAmount <= balance)
-                balance -= withdrawAmount;
-            else
-                cout << "Not enough money" << endl;
+            user.withdraw(withdrawAmount);
             break;
         }
         system("pause");
